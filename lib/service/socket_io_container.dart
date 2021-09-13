@@ -1,16 +1,17 @@
 
 
 
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:vouch_chatroom/utils/custom_socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketIoContainer {
   late IO.Socket _socketIO;
 
   SocketIoContainer() {
-    _socketIO = IO.io('http://192.168.0.188:8080',
+    _socketIO = IO.io('http://139.59.117.168:8889',
         OptionBuilder()
-            .setTransports(['websocket', 'polling']) // for Flutter or Dart VM
+            .setTransports(['websocket', 'polling'])
+            .setExtraHeaders({'Connection': 'upgrade', 'Upgrade': 'websocket'})
             .enableAutoConnect()
             .enableForceNew()
             .build());
