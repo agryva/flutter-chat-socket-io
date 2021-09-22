@@ -1,17 +1,17 @@
 
 
 
-import 'package:vouch_chatroom/utils/custom_socket_io_client.dart' as IO;
+// import 'package:vouch_chatroom/utils/custom_socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketIoContainer {
   late IO.Socket _socketIO;
 
   SocketIoContainer() {
-    _socketIO = IO.io('http://139.59.117.168:8889',
+    _socketIO = IO.io('http://igun.someah.id',
         OptionBuilder()
             .setTransports(['websocket', 'polling'])
-            .setExtraHeaders({'Connection': 'upgrade', 'Upgrade': 'websocket'})
             .enableAutoConnect()
             .enableForceNew()
             .build());
@@ -26,7 +26,7 @@ class SocketIoContainer {
       print("ini onReconnect");
     });
     _socketIO.onConnectError((f) {
-      print("ini onConnectError ${f}");
+      print("ini onConnectError $f");
     });
     _socketIO.onDisconnect((_) => print('disconnect'));
     _socketIO.on('fromServer', (_) => print(_));
